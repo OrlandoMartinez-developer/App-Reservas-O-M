@@ -1,0 +1,54 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #0d1b2a;
+  animation: background 10s ease infinite;
+}
+
+@keyframes background {
+  0% {
+      background-color: #0d1b2a;
+  }
+  50% {
+      background-color: #16325c;
+  }
+  100% {
+      background-color: #0d1b2a;
+  }
+}
+
+#settings {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  #settings h2,
+  #settings h3 {
+    margin-top: 0;
+  }
+  
+  #settings button {
+    background-color: #ffd700;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  #settings select {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+  }

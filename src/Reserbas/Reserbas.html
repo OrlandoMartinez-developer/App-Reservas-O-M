@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Reservación</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #0d1b2a;
+            animation: background 10s ease infinite;
+        }
+
+        @keyframes background {
+            0% {
+                background-color: #0d1b2a;
+            }
+            50% {
+                background-color: #16325c;
+            }
+            100% {
+                background-color: #0d1b2a;
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        label {
+            color: #16325c;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="date"], input[type="time"] {
+            margin-bottom: 15px;
+            padding: 8px;
+            border: 1px solid #16325c;
+            border-radius: 8px;
+        }
+
+        input[type="submit"] {
+            background-color: #16325c;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0d1b2a;
+        }
+
+        select{
+            margin-bottom: 15px;
+            padding: 8px;
+            border: 1px solid #16325c;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <label for="profesor">Nombre del profesor:</label>
+        <input type="text" id="profesor" name="profesor" required>
+
+        <label for="materia">Materia:</label>
+        <input type="text" id="materia" name="materia" required>
+
+        <label for="seccion">Sección:</label>
+        <input type="text" id="seccion" name="seccion" required>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" required>
+
+        <label for="Tanda">Tanda</label>
+        <select name="Tanda" id="Tanda">
+            <option value="Maturina">Matutina</option>
+            <option value="Vespertina">Vespertina</option>
+            <option value="Nocturna">Nocturna</option>
+        </select>
+
+        <label for="hora_entrada">Hora de entrada:</label>
+        <input type="time" id="hora_entrada" name="hora_entrada" required>
+
+        <label for="hora_salida">Hora de salida:</label>
+        <input type="time" id="hora_salida" name="hora_salida" required>
+
+        <input type="submit" value="Reservar" id="Reservar">
+    </form>
+    <p id="mensaje" style="display:none;"></p>
+    <script src="../data_base.js"></script>
+</body>
+</html>
