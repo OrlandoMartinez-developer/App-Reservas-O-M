@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Admin</title>
+    <style>
+        /* Animación de fondo con Tailwind */
+        @keyframes background {
+            0%, 100% { background-color: #0d1b2a; }
+            50% { background-color: #16325c; }
+        }
+
+        body {
+            animation: background 10s ease infinite;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center h-screen bg-[#0d1b2a]">
+    <div class="space-x-4">
+        <button class="bg-white text-[#16325c] py-3 px-8 rounded-lg transition-all duration-300 hover:bg-[#16325c] hover:text-white">
+            <a href="../Reserbas/Reserbas.html">Reservas</a>
+        </button>
+        <!-- <button class="bg-white text-[#16325c] py-3 px-8 rounded-lg transition-all duration-300 hover:bg-[#16325c] hover:text-white">
+            <a href="../Ajustes/Ajustes.html">Ajustes</a>
+        </button> -->
+        <button class="bg-white text-[#16325c] py-3 px-8 rounded-lg transition-all duration-300 hover:bg-[#16325c] hover:text-white">
+            <a href="../Registro/registro.html">Registrar</a>
+        </button>
+        <button class="bg-yellow-400 text-black py-3 px-8 rounded-lg transition-all duration-300 hover:bg-[#7E7343]">
+            <a href="../../index.html">Salir</a>
+        </button>
+    </div>
+</body>
+</html>
