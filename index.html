@@ -57,16 +57,18 @@
           <!-- Enlace para crear cuenta -->
           <div class="mt-4">
             <p class="text-gray-400">¿No tienes una cuenta? 
-              <a href="/src/pages/registro.html" class="text-blue-300 hover:text-blue-500">Crear cuenta</a>
+              <a href="src/pages/registro.html" class="text-blue-300 hover:text-blue-500">Crear cuenta</a>
             </p>
           </div>
         </div>
     </div>
-      
-    <script>
+      <p id="info"></p>
+    <script> 
       document.getElementById("ingresar").addEventListener("click", function() {
-          window.location.href = "/src/pages/formulario.html";
+          window.location.href = "src/pages/formulario.html";
       });
     </script>
+    <script src="./precarga.js"></script>
+    <script src="./render.js"></script>
 </body>
 </html>
