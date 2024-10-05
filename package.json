@@ -23,5 +23,8 @@
     "mssql": "^10.0.2",
     "mysql": "^2.18.1",
     "promise-mysql": "^5.2.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.13"
   }
 }
