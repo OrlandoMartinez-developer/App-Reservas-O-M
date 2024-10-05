@@ -1,5 +1,11 @@
 const { app, BrowserWindow, ipcMain } = require('electron/main')
 const path = require('node:path')
+const {getConection} = require('./database')
+
+function rs(){
+  const conn = getConection()
+  
+}
 
 const createWindow = () => {
   const win = new BrowserWindow({

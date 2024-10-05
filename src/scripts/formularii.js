@@ -1,6 +1,7 @@
 document.getElementById("reservationForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Evita que la página se recargue
-
+const {remote} = require('electron')
+const main = require('../main')
     // Capturar los datos del formulario
     const reservationData = {
       maestro: document.getElementById("maestroInput").value,
@@ -32,14 +33,7 @@ document.getElementById("reservationForm").addEventListener("submit", function(e
 
     // Si la validación es correcta, continuar
     if (isValid) {
-        // Convertir los datos a formato JSON
-        const jsonData = JSON.stringify(reservationData);
-        // Imprimir el resultado en la consola
-        console.log(jsonData);
-        
-        // Aquí puedes agregar la lógica para enviar los datos al servidor si es necesario
-
-        // Limpiar el formulario
+        main.createReserva(reservationData)
         this.reset();
     }
 });
