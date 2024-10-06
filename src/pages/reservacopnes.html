@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservaciones</title>
-    <script src="../scripts/formularii.js"></script>
+    <script src="../scripts/rs.js" defer></script> <!-- Cargar el script al final -->
     <link rel="stylesheet" href="../output.css">
 </head>
 <body>
@@ -14,7 +14,6 @@
             <div class="text-center mb-8">
                 <!-- Logo -->
                 <svg class="w-16 h-16 mx-auto" fill="currentColor" id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 102.96 86.92">
-                    <!-- SVG del logo -->
                     <defs>
                         <style>
                             .cls-1 { fill: #52bfd4; }
@@ -43,11 +42,11 @@
         </aside>
 
         <!-- Contenido principal -->
-        <main class="flex-1 bg-teal-800 p-6">
+        <main class="flex flex-col items-center justify-center bg-teal-800 p-6 w-3/4">
             <h1 class="text-3xl text-white mb-6">Reservaciones</h1>
 
             <!-- Buscador y Filtros -->
-            <div class="bg-teal-700 p-4 rounded-md mb-6">
+            <div class="bg-teal-700 p-4 rounded-md mb-6 w-full">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <!-- Buscador -->
                     <input type="text" id="searchInput" placeholder="Buscar reservación" class="p-2 rounded-md w-full text-gray-700 focus:outline-none">
@@ -55,22 +54,16 @@
                     <!-- Filtro por Maestro -->
                     <select id="filterMaestro" class="p-2 rounded-md w-full text-gray-700 focus:outline-none">
                         <option value="">Filtrar por maestro</option>
-                        <option value="Maestro 1">Maestro 1</option>
-                        <option value="Maestro 2">Maestro 2</option>
                     </select>
 
                     <!-- Filtro por Materia -->
                     <select id="filterMateria" class="p-2 rounded-md w-full text-gray-700 focus:outline-none">
                         <option value="">Filtrar por materia</option>
-                        <option value="Materia 1">Materia 1</option>
-                        <option value="Materia 2">Materia 2</option>
                     </select>
 
                     <!-- Filtro por Laboratorio -->
                     <select id="filterLab" class="p-2 rounded-md w-full text-gray-700 focus:outline-none">
                         <option value="">Filtrar por laboratorio</option>
-                        <option value="Laboratorio 1">Laboratorio 1</option>
-                        <option value="Laboratorio 2">Laboratorio 2</option>
                     </select>
 
                     <!-- Filtro por Fecha -->
@@ -83,7 +76,7 @@
             </div>
 
             <!-- Tabla de reservaciones -->
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto w-full">
                 <table class="w-full bg-teal-700 text-white rounded-md">
                     <thead>
                         <tr class="bg-teal-600">
@@ -96,18 +89,18 @@
                         </tr>
                     </thead>
                     <tbody id="reservationTable">
+                        <!-- Filas dinámicas generadas por el script -->
                         <tr>
                             <td class="py-2 px-4">1</td>
-                            <td class="py-2 px-4">Maestro 1</td>
-                            <td class="py-2 px-4">Materia 1</td>
-                            <td class="py-2 px-4">Laboratorio 1</td>
-                            <td class="py-2 px-4">2024-10-01</td>
-                            <td class="py-2 px-4 space-x-2">
-                                <button class="px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600">Editar</button>
-                                <button class="px-4 py-2 bg-red-500 rounded-md hover:bg-red-600">Eliminar</button>
+                            <td class="py-2 px-4">Profesor A</td>
+                            <td class="py-2 px-4">Materia X</td>
+                            <td class="py-2 px-4">Lab 101</td>
+                            <td class="py-2 px-4">2024-10-05</td>
+                            <td class="py-2 px-4 flex space-x-2"> <!-- Espacio entre botones -->
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Editar</button>
+                                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2">Eliminar</button> <!-- Margen izquierdo para separar -->
                             </td>
                         </tr>
-                        <!-- Más filas de reservaciones -->
                     </tbody>
                 </table>
             </div>
@@ -118,7 +111,5 @@
             </div>
         </main>
     </div>
-
-    <script src="../scripts/rs.js"></script>
 </body>
 </html>
