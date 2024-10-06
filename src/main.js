@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('node:path');
 const { getConection } = require('./database'); // Importar la conexión a la base de datos
+const bcrypt = require('bcrypt');
 
 // Crear una nueva reservación
 ipcMain.handle('create-reservation', async (event, reservationData) => {
@@ -60,6 +61,48 @@ ipcMain.handle('updateReservation', async (event, reservationData) => {
     return result.affectedRows; // Devuelve el número de filas afectadas
   } catch (error) {
     throw new Error(`Error al actualizar la reservación: ${error.message}`);
+  }
+});
+
+// Manejar el registro de usuarios
+ipcMain.handle('register-user', async (event, userData) => {
+  const connection = await getConection(); // Obtener la conexión a la base de datos
+  try {
+    // Encriptar la contraseña
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+
+    // Insertar los datos en la base de datos
+    const query = 'INSERT INTO usuarios (username, email, password) VALUES (?, ?, ?)';
+    const values = [userData.username, userData.email, hashedPassword];
+
+    const [result] = await connection.execute(query, values);
+    return result.insertId; // Devuelve el ID del usuario creado
+  } catch (error) {
+    throw new Error(`Error al registrar el usuario: ${error.message}`);
+  }
+});
+
+// Manejar el inicio de sesión
+ipcMain.handle('login-user', async (event, loginData) => {
+  const connection = await getConection(); // Obtener la conexión a la base de datos
+  try {
+    const query = 'SELECT * FROM usuarios WHERE email = ?';
+    const [rows] = await connection.execute(query, [loginData.email]);
+
+    if (rows.length > 0) {
+      const user = rows[0];
+      // Comparar la contraseña ingresada con la almacenada
+      const match = await bcrypt.compare(loginData.password, user.password);
+      if (match) {
+        return { success: true, userId: user.id }; // Login exitoso
+      } else {
+        return { success: false, message: 'Contraseña incorrecta' };
+      }
+    } else {
+      return { success: false, message: 'Usuario no encontrado' };
+    }
+  } catch (error) {
+    throw new Error(`Error al iniciar sesión: ${error.message}`);
   }
 });
 
