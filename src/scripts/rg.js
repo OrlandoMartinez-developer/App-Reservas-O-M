@@ -11,7 +11,7 @@ document.getElementById('registerFom').addEventListener("submit", async function
     try {
         const result = await window.versions.registerUser(registerData);
         console.log('Usuario registrado con ID:', result);
-        // Puedes redirigir al usuario o mostrar un mensaje de éxito
+        window.locate.href = ('index.html')
     } catch (error) {
         console.error('Error al registrar el usuario:', error);
     }
