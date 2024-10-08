@@ -9,4 +9,6 @@ contextBridge.exposeInMainWorld('versions', {
     getReservations: () => ipcRenderer.invoke('getReservations'),
     registerUser: (userData) => ipcRenderer.invoke('register-user', userData),
     loginUser: (loginData) => ipcRenderer.invoke('login-user', loginData),
+    updateReservation: (reservationData) => ipcRenderer.invoke('updateReservation', reservationData),
+    deleteReservation: (reservationData) => ipcRenderer.invoke('deleteReservation', reservationData),
   });

@@ -10,12 +10,16 @@
     <link rel="stylesheet" href="../output.css" />
     <style>
         #editModal {
-            position: absolute;
+            position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1000;
-            background-color: teal;
+            background-color: rgb(0, 128, 128);
+            color: white;
+        }
+        input{
+            color: black;
         }
 
         .hidden {
@@ -132,8 +136,7 @@
                         <!-- Filas dinámicas generadas por el script -->
                         <tr>
                             <td class="py-2 px-4">2024-10-05</td>
-                            <td class="py-2 px-4 flex space-x-2">
-                                <!-- Espacio entre botones -->
+                            <td class="py-2 px-4 flex flex-col space-y-2"> <!-- Cambiado a flex-col y space-y-2 -->
                                 <button class="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 edit-btn"
                                     data-id="1">
                                     Editar
@@ -142,6 +145,8 @@
                                     data-id="1">
                                     Eliminar
                                 </button>
+                            </td>
+                            
                             </td>
                         </tr>
                     </tbody>

@@ -31,10 +31,17 @@ function renderTable(filteredReservations) {
       <td class="py-2 px-4">${reservation.fecha}</td>
       <td class="py-2 px-4">${reservation.horaEntrada}</td>
       <td class="py-2 px-4">${reservation.horaSalida}</td>
-      <td class="py-2 px-4 space-x-2">
-        <button class="edit-btn px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600 m-1" data-id="${reservation.id}">Editar</button>
-        <button class="delete-btn px-4 py-2 bg-red-500 rounded-md hover:bg-red-600 m-1" data-id="${reservation.id}">Eliminar</button>
-      </td>
+      <td class="py-2 px-4 flex flex-col space-y-2"> <!-- Cambiado a flex-col y space-y-2 -->
+    <button class="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 edit-btn"
+        data-id="1">
+        Editar
+    </button>
+    <button class="bg-red-500 hover:bg-red-600 text-white rounded-md px-4 py-2 delete-btn"
+        data-id="1">
+        Eliminar
+    </button>
+</td>
+
     `;
 
     reservationTable.appendChild(row);
@@ -107,13 +114,12 @@ function openEditModal(reservation) {
 
     
     try {
-      // Llamar al backend para actualizar la reservación en la base de datos
       await window.versions.updateReservation(updatedReservation);
 
       const index = reservations.findIndex(r => r.id == updatedReservation.id);
       reservations[index] = updatedReservation;
 
-      // Vuelve a renderizar la tabla
+    
       renderTable(reservations);
       editModal.classList.add("hidden");
     } catch (error) {
