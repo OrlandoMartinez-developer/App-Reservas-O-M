@@ -1,15 +1,23 @@
-document.getElementById("reservationForm").addEventListener("submit", function(event) {
+document.getElementById("reservationForm").addEventListener("submit", async function(event) {
     event.preventDefault(); // Evita que la página se recargue
 
     // Capturar los datos del formulario
     const reservationData = {
-      maestro: document.getElementById("maestroInput").value,
-      materia: document.getElementById("materiaInput").value,
-      fecha: document.getElementById("fechaInput").value,
-      hora: document.getElementById("horaInput").value,
-      horaSalida: document.getElementById("horaSalidaInput").value,
-      laboratorio: document.getElementById("laboratorioInput").value,
+        maestro: document.getElementById("maestroInput").value,
+        materia: document.getElementById("materiaInput").value,
+        fecha: document.getElementById("fechaInput").value,
+        hora: document.getElementById("horaInput").value,
+        horaSalida: document.getElementById("horaSalidaInput").value,
+        laboratorio: document.getElementById("laboratorioInput").value,
     };
+
+    try {
+        // Crear una nueva reservación en la base de datos a través del contexto expuesto en preload
+        const reservationId = await window.versions.createReservation(reservationData);
+        alert("Reservación creada con ID: " + reservationId);
+    } catch (error) {
+        console.error("Error al crear la reservación:", error);
+    } 
 
     let isValid = true; // Variable para controlar el estado de validación
 
@@ -32,15 +40,8 @@ document.getElementById("reservationForm").addEventListener("submit", function(e
 
     // Si la validación es correcta, continuar
     if (isValid) {
-        // Convertir los datos a formato JSON
-        const jsonData = JSON.stringify(reservationData);
-        // Imprimir el resultado en la consola
-        console.log(jsonData);
-        
-        // Aquí puedes agregar la lógica para enviar los datos al servidor si es necesario
-
-        // Limpiar el formulario
-        this.reset();
+        console.log("Reservación válida y creada");
+        this.reset(); // Resetear el formulario
     }
 });
 

@@ -43,10 +43,10 @@
           <!-- Formulario de inicio de sesión -->
           <div class="space-y-4">
             <!-- Input de usuario -->
-  <input type="text" placeholder="Usuario" class="block w-64 px-4 py-2 text-lg text-center text-white bg-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+  <input  id="email" type="text" placeholder="Email"  class="block w-64 px-4 py-2 text-lg text-center text-white bg-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
   
   <!-- Input de contraseña -->
-  <input type="password" placeholder="Contraseña" class="block w-64 px-4 py-2 text-lg text-center text-white bg-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+  <input id="password" type="password" placeholder="Contraseña" class="block w-64 px-4 py-2 text-lg text-center text-white bg-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
             
             <!-- Botón de ingresar -->
             <button id="ingresar" class="w-64 px-4 py-2 text-lg font-semibold text-white bg-cyan-500 rounded-md hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-400">
@@ -63,11 +63,7 @@
         </div>
     </div>
       <p id="info"></p>
-    <script> 
-      document.getElementById("ingresar").addEventListener("click", function() {
-          window.location.href = "src/pages/formulario.html";
-      });
-    </script>
+    <script src="./src/scripts/login.js"></script>
     <script src="./precarga.js"></script>
     <script src="./render.js"></script>
 </body>
