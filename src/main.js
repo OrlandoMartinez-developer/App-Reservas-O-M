@@ -121,8 +121,8 @@ ipcMain.handle('deleteReservation', async (event, reservationId) => {
 // Crear ventana principal
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 1000,
-    height: 600,
+    width: 2000,
+    height: 2000,
     webPreferences: {
       preload: path.join(__dirname, '../precarga.js') // Carga el script de precarga
     }
