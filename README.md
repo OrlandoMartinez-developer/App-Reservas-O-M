@@ -1,59 +1,74 @@
+App de Reservaciones
+Descripción
+La App de Reservaciones es una aplicación que permite gestionar las reservaciones de laboratorios de manera eficiente. Los usuarios pueden crear, editar, eliminar y filtrar reservaciones, así como generar reportes en formato PDF. Está diseñada para su uso en entornos académicos donde se requiere la organización de laboratorios.
 
-# App de Reservaciones
+Tecnologías Utilizadas
+Electron: Para empaquetar la aplicación en un entorno de escritorio multiplataforma.
+MySQL: Base de datos relacional para el almacenamiento de las reservaciones.
+JavaScript: Lógica principal de la aplicación.
+HTML y CSS: Estructura y diseño de la interfaz.
+Tailwind CSS: Framework de diseño para estilos modernos y responsivos.
+jsPDF: Para la generación de documentos PDF con las reservaciones.
+Requisitos Previos
+Antes de comenzar, asegúrate de tener las siguientes herramientas instaladas:
 
-## Descripción
-Esta aplicación permite a los usuarios gestionar reservaciones de laboratorios. Los usuarios pueden crear, editar, eliminar y filtrar reservaciones de manera sencilla. 
+Node.js (v14 o superior)
+MySQL (v5.7 o superior)
+Git (para clonar el repositorio)
+Instalación
+Clonar el repositorio:
 
-## Tecnologías Utilizadas
-- **Electron**: Para construir la aplicación de escritorio.
-- **MySQL**: Para la gestión de la base de datos.
-- **JavaScript**: Lenguaje de programación principal para la lógica de la aplicación.
-- **HTML/CSS**: Para la estructura y estilo de la interfaz de usuario.
+bash
+Copy code
+git clone https://github.com/tu-usuario/App_Reservas.git
+cd App_Reservas
+Instalar las dependencias:
 
-## Requisitos Previos
-Asegúrate de tener instalado lo siguiente en tu máquina:
-- [Node.js](https://nodejs.org/) (v14 o superior)
-- [MySQL](https://www.mysql.com/) (v5.7 o superior)
+bash
+Copy code
+npm install
+Configurar la base de datos:
 
-## Instalación
+Crea una base de datos MySQL llamada biblioteca01.
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone https://github.com/tu-usuario/App_Reservas.git
-   cd App_Reservas
-   ```
+Asegúrate de que el usuario root sin contraseña tenga acceso a esta base de datos.
 
-2. **Instalar las dependencias:**
-   ```bash
-   npm install
-   ```
+Puedes ejecutar el siguiente comando en MySQL para crear la base de datos:
 
-3. **Configurar la base de datos:**
-   - Crea una base de datos en MySQL llamada `biblioteca01`.
-   - Asegúrate de que el usuario `root` sin contraseña tenga acceso a esta base de datos.
+sql
+Copy code
+CREATE DATABASE biblioteca01;
+Iniciar la aplicación:
 
-4. **Ejecutar la aplicación:**
-   ```bash
-   npm start
-   ```
+Una vez que la base de datos esté configurada, ejecuta la aplicación con el siguiente comando:
 
-## Uso
-- **Crear Reservación**: Completa el formulario con los detalles de la reservación.
-- **Editar Reservación**: Haz clic en el botón "Editar" junto a la reservación que deseas modificar.
-- **Eliminar Reservación**: Haz clic en el botón "Eliminar" y confirma la acción.
-- **Filtrar Reservaciones**: Utiliza los filtros y la barra de búsqueda para encontrar reservaciones específicas.
+bash
+Copy code
+npm start
+Uso
+Crear una Reservación
+Completa el formulario de reservación con los campos requeridos: maestro, materia, fecha, hora y número de laboratorio.
+Haz clic en Guardar para registrar la reservación.
+Editar una Reservación
+Selecciona la reservación que deseas editar de la lista.
+Modifica los campos y haz clic en Guardar para actualizar la información.
+Eliminar una Reservación
+Encuentra la reservación que deseas eliminar en la lista.
+Haz clic en el botón Eliminar y confirma la acción.
+Filtrar y Buscar Reservaciones
+Utiliza la barra de búsqueda para buscar reservaciones por maestro, materia o laboratorio.
+Aplica filtros para visualizar reservaciones por maestro, materia o número de laboratorio.
+Generar Reporte en PDF
+Filtra las reservaciones por un rango de fechas específico.
+Haz clic en el botón Generar PDF para exportar las reservaciones en un archivo PDF.
+Contribuciones
+Si deseas contribuir a este proyecto:
 
-
-
-## Contribuciones
-Las contribuciones son bienvenidas. Si deseas contribuir, por favor crea un `fork` del repositorio y envía un `pull request`.
-
-## Licencia
-Este proyecto está licenciado bajo la [MIT License](LICENSE).
-
-### Instrucciones:
-- **Reemplaza `tu-usuario` en la URL del repositorio con tu nombre de usuario de GitHub.**
-- **Asegúrate de que la estructura de archivos y la configuración de tu proyecto coincidan con la documentación.**
-
+Haz un fork del repositorio.
+Crea una nueva rama para tu funcionalidad o corrección:
+bash
+Copy code
+git checkout -b nombre-de-tu-rama
+Realiza tus cambios y envía un pull request.
 
 Puedes copiar y pegar este texto directamente en tu archivo `README.md`. Si necesitas más cambios o adiciones, ¡solo dímelo!
