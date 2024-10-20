@@ -43,18 +43,7 @@ Asegúrate de tener instalado lo siguiente en tu máquina:
 - **Eliminar Reservación**: Haz clic en el botón "Eliminar" y confirma la acción.
 - **Filtrar Reservaciones**: Utiliza los filtros y la barra de búsqueda para encontrar reservaciones específicas.
 
-## Estructura de Archivos
-```
-App_Reservas/
-├── src/
-│   ├── main.js          # Archivo principal de Electron
-│   ├── renderer.js      # Lógica del frontend
-│   ├── database.js      # Conexión y consultas a la base de datos
-│   ├── precarga.js      # Script de precarga
-│   └── rs.js            # Lógica para la gestión de reservaciones
-├── package.json          # Configuración del proyecto y dependencias
-└── README.md             # Documentación del proyecto
-```
+
 
 ## Contribuciones
 Las contribuciones son bienvenidas. Si deseas contribuir, por favor crea un `fork` del repositorio y envía un `pull request`.
