@@ -7,19 +7,62 @@ function formatDateToInput(date) {
   return `${year}-${month}-${day}`;
 }
 
-// Cargar las reservaciones al inicio
+// Inicializa el array de reservaciones
+let reservations = [];
+
+// Función para cargar las reservaciones desde la base de datos
 async function loadReservations() {
   try {
-    reservations = await window.versions.getReservations();
+    reservations = await window.versions.getReservations(); // Obtener las reservas desde el backend
+    populateFilters(reservations); // Poblar los filtros con los datos obtenidos
     renderTable(reservations); // Renderizar las reservaciones en la tabla
   } catch (error) {
     console.error("Error al cargar las reservaciones:", error);
   }
 }
 
+// Función para poblar los filtros con datos únicos
+function populateFilters(reservations) {
+  const maestros = new Set(reservations.map(res => res.maestro));
+  const materias = new Set(reservations.map(res => res.materia));
+  const laboratorios = new Set(reservations.map(res => res.laboratorio));
+
+  const filterMaestro = document.getElementById("filterMaestro");
+  const filterMateria = document.getElementById("filterMateria");
+  const filterLab = document.getElementById("filterLab");
+
+  // Limpiar los filtros antes de agregar nuevas opciones
+  filterMaestro.innerHTML = '<option value="">Maestros</option>';
+  filterMateria.innerHTML = '<option value="">Materia</option>';
+  filterLab.innerHTML = '<option value="">Laboratorio</option>';
+
+  // Agregar opciones a cada filtro
+  maestros.forEach(maestro => {
+    const option = document.createElement("option");
+    option.value = maestro;
+    option.textContent = maestro;
+    filterMaestro.appendChild(option);
+  });
+
+  materias.forEach(materia => {
+    const option = document.createElement("option");
+    option.value = materia;
+    option.textContent = materia;
+    filterMateria.appendChild(option);
+  });
+
+  laboratorios.forEach(lab => {
+    const option = document.createElement("option");
+    option.value = lab;
+    option.textContent = lab;
+    filterLab.appendChild(option);
+  });
+}
+
+// Función para renderizar la tabla con las reservaciones
 function renderTable(filteredReservations) {
   const reservationTable = document.getElementById("reservationTable");
-  reservationTable.innerHTML = ""; // Limpia la tabla antes de agregar nuevas filas
+  reservationTable.innerHTML = ""; // Limpiar la tabla
 
   filteredReservations.forEach((reservation) => {
     const row = document.createElement("tr");
@@ -31,19 +74,15 @@ function renderTable(filteredReservations) {
       <td class="py-2 px-4">${reservation.fecha}</td>
       <td class="py-2 px-4">${reservation.horaEntrada}</td>
       <td class="py-2 px-4">${reservation.horaSalida}</td>
-      <td class="py-2 px-4 flex flex-col space-y-2"> <!-- Cambiado a flex-col y space-y-2 -->
-    <button class="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 edit-btn"
-        data-id="1">
-        Editar
-    </button>
-    <button class="bg-red-500 hover:bg-red-600 text-white rounded-md px-4 py-2 delete-btn"
-        data-id="1">
-        Eliminar
-    </button>
-</td>
-
+      <td class="py-2 px-4 flex flex-col space-y-2">
+        <button class="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2 edit-btn" data-id="${reservation.id}">
+          Editar
+        </button>
+        <button class="bg-red-500 hover:bg-red-600 text-white rounded-md px-4 py-2 delete-btn" data-id="${reservation.id}">
+          Eliminar
+        </button>
+      </td>
     `;
-
     reservationTable.appendChild(row);
   });
 
@@ -52,22 +91,18 @@ function renderTable(filteredReservations) {
     button.addEventListener('click', (event) => {
       const reservationId = event.target.getAttribute('data-id');
       const reservation = reservations.find(r => r.id == reservationId);
-      openEditModal(reservation); // Abrir el modal de edición
+      openEditModal(reservation); // Abrir modal de edición
     });
   });
 
   document.querySelectorAll('.delete-btn').forEach(button => {
     button.addEventListener('click', async (event) => {
       const reservationId = event.target.getAttribute('data-id');
-
       if (confirm("¿Eliminar esta reservación?")) {
         try {
-          // Llamar al backend para eliminar la reservación en la base de datos
-          await window.versions.deleteReservation(reservationId);
-          // Eliminar la reservación del array local
-          reservations = reservations.filter(r => r.id != reservationId);
-          // Vuelve a renderizar la tabla
-          renderTable(reservations);
+          await window.versions.deleteReservation(reservationId); // Eliminar en backend
+          reservations = reservations.filter(r => r.id != reservationId); // Actualizar array local
+          renderTable(reservations); // Renderizar tabla nuevamente
         } catch (error) {
           console.error("Error al eliminar la reservación:", error);
         }
@@ -81,7 +116,6 @@ function openEditModal(reservation) {
   const editModal = document.getElementById("editModal");
   const editReservationForm = document.getElementById("editReservationForm");
 
-  // Rellenar los campos del formulario con los datos de la reservación a editar
   document.getElementById("editReservationId").value = reservation.id;
   document.getElementById("editMaestro").value = reservation.maestro;
   document.getElementById("editMateria").value = reservation.materia;
@@ -90,18 +124,14 @@ function openEditModal(reservation) {
   document.getElementById("editHoraEntrada").value = reservation.horaEntrada.slice(0, 5);
   document.getElementById("editHoraSalida").value = reservation.horaSalida.slice(0, 5);
 
-  // Mostrar el modal
   editModal.classList.remove("hidden");
 
-  // Manejar la cancelación del modal
   document.getElementById("closeModal").onclick = () => {
-    editModal.classList.add("hidden"); // Cerrar el modal correctamente
+    editModal.classList.add("hidden");
   };
 
-  // Manejar el envío del formulario de edición
   editReservationForm.onsubmit = async (e) => {
     e.preventDefault();
-
     const updatedReservation = {
       id: document.getElementById("editReservationId").value,
       maestro: document.getElementById("editMaestro").value,
@@ -112,14 +142,10 @@ function openEditModal(reservation) {
       horaSalida: document.getElementById("editHoraSalida").value,
     };
 
-    
     try {
       await window.versions.updateReservation(updatedReservation);
-
       const index = reservations.findIndex(r => r.id == updatedReservation.id);
       reservations[index] = updatedReservation;
-
-    
       renderTable(reservations);
       editModal.classList.add("hidden");
     } catch (error) {
@@ -128,25 +154,18 @@ function openEditModal(reservation) {
   };
 }
 
-
-// Asegúrate de que el código se ejecute cuando el DOM esté completamente cargado
+// Configuración al cargar el DOM
 document.addEventListener("DOMContentLoaded", () => {
   const filterMaestro = document.getElementById("filterMaestro");
   const filterMateria = document.getElementById("filterMateria");
   const filterLab = document.getElementById("filterLab");
-  const searchInput = document.getElementById("searchInput");
-  const reservationTable = document.getElementById("reservationTable");
 
-  let reservations = [loadReservations]; // Aquí debes inicializar tus reservaciones
-
-  // Cargar las reservaciones
   loadReservations();
 
-  // Agregar eventos a los filtros
   filterMaestro.addEventListener("change", () => {
     const selectedMaestro = filterMaestro.value;
     const filteredReservations = selectedMaestro
-      ? reservations.filter(reservation => reservation.maestro === selectedMaestro)
+      ? reservations.filter(res => res.maestro === selectedMaestro)
       : reservations;
     renderTable(filteredReservations);
   });
@@ -154,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
   filterMateria.addEventListener("change", () => {
     const selectedMateria = filterMateria.value;
     const filteredReservations = selectedMateria
-      ? reservations.filter(reservation => reservation.materia === selectedMateria)
+      ? reservations.filter(res => res.materia === selectedMateria)
       : reservations;
     renderTable(filteredReservations);
   });
@@ -162,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
   filterLab.addEventListener("change", () => {
     const selectedLab = filterLab.value;
     const filteredReservations = selectedLab
-      ? reservations.filter(reservation => reservation.laboratorio === selectedLab)
+      ? reservations.filter(res => res.laboratorio === selectedLab)
       : reservations;
     renderTable(filteredReservations);
   });
