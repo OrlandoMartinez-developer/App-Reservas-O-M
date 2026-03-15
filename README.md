@@ -1,95 +1,99 @@
-# App de Reservaciones
+# App Reservas O&M — Sistema de Gestión de Reservas
 
-## Descripción
+> Aplicación web para gestionar reservas de salones y espacios en la Universidad O&M.
 
-La App de Reservaciones es una aplicación que permite gestionar las reservaciones de laboratorios de manera eficiente. Los usuarios pueden crear, editar, eliminar y filtrar reservaciones, así como generar reportes en formato PDF. Está diseñada para su uso en entornos académicos donde se requiere la organización de laboratorios.
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Stars](https://img.shields.io/github/stars/OrlandoMartinez-developer/App-Reservas-O-M?style=flat-square)
 
-## Tecnologías Utilizadas
+---
 
-- **Electron**: Para empaquetar la aplicación en un entorno de escritorio multiplataforma.
-- **MySQL**: Base de datos relacional para el almacenamiento de las reservaciones.
-- **JavaScript**: Lógica principal de la aplicación.
-- **HTML y CSS**: Estructura y diseño de la interfaz.
-- **Tailwind CSS**: Framework de diseño para estilos modernos y responsivos.
-- **jsPDF**: Para la generación de documentos PDF con las reservaciones.
+## ¿Qué hace este proyecto?
 
-## Requisitos Previos
+Aplicación web frontend para la comunidad universitaria O&M que permite ver la disponibilidad de salones, aulas y espacios comunes, y realizar reservas de forma rápida sin necesidad de ir presencialmente a la administración. Construida con HTML, CSS y JavaScript vanilla — sin dependencias externas, fácil de mantener y desplegar.
 
-Antes de comenzar, asegúrate de tener las siguientes herramientas instaladas:
+## Stack técnico
 
-- **Node.js** (v14 o superior)
-- **MySQL** (v5.7 o superior)
-- **Git** (para clonar el repositorio)
+| Capa | Tecnología |
+|---|---|
+| Markup | HTML5 |
+| Estilos | CSS3 (Flexbox + Grid) |
+| Lógica | JavaScript (ES6+) |
+| Almacenamiento | LocalStorage / JSON |
+| Deploy | GitHub Pages / cualquier hosting estático |
 
-## Instalación
+## Estructura del proyecto
 
-1. Clonar el repositorio:
+```
+App-Reservas-O-M/
+├── index.html              # Página principal / listado de espacios
+├── reservar.html           # Formulario de reserva
+├── mis-reservas.html       # Panel de reservas del usuario
+├── admin.html              # Panel de administración
+├── css/
+│   ├── main.css            # Estilos globales
+│   ├── components.css      # Componentes reutilizables
+│   └── responsive.css      # Media queries
+├── js/
+│   ├── app.js              # Lógica principal
+│   ├── reservas.js         # Gestión de reservas
+│   ├── calendario.js       # Vista de calendario
+│   └── storage.js          # Abstracción de LocalStorage
+└── assets/
+    └── img/                # Imágenes de los espacios
+```
 
-    ```bash
-    git clone https://github.com/tu-usuario/App_Reservas.git
-    cd App_Reservas
-    ```
+## Instalación y uso
 
-2. Instalar las dependencias:
+No requiere instalación ni servidor. Clona el repositorio y abre `index.html` directamente en el navegador:
 
-    ```bash
-    npm install
-    ```
+```bash
+git clone https://github.com/OrlandoMartinez-developer/App-Reservas-O-M.git
+cd App-Reservas-O-M
+# Abre index.html en tu navegador
+```
 
-3. Configurar la base de datos:
+O accede a la versión live en GitHub Pages si está habilitado.
 
-    - Crea una base de datos MySQL llamada `biblioteca01`.
-    - Asegúrate de que el usuario root sin contraseña tenga acceso a esta base de datos.
-    - Puedes ejecutar el siguiente comando en MySQL para crear la base de datos:
+## Funcionalidades
 
-    ```sql
-    CREATE DATABASE biblioteca01;
-    ```
+| Función | Descripción |
+|---|---|
+| **Catálogo de espacios** | Ver todos los salones con capacidad, equipamiento y foto |
+| **Disponibilidad** | Calendario visual de disponibilidad por espacio y fecha |
+| **Reservar** | Formulario para solicitar reserva (fecha, hora, motivo) |
+| **Mis reservas** | Ver, editar y cancelar reservas propias |
+| **Panel admin** | Aprobar/rechazar solicitudes, gestionar espacios |
 
-4. Iniciar la aplicación:
+## Flujo de reserva
 
-    Una vez que la base de datos esté configurada, ejecuta la aplicación con el siguiente comando:
+```
+1. Usuario selecciona espacio
+       ↓
+2. Verifica disponibilidad en calendario
+       ↓
+3. Completa formulario (fecha, hora inicio/fin, motivo)
+       ↓
+4. Reserva queda en estado "Pendiente"
+       ↓
+5. Admin aprueba o rechaza
+       ↓
+6. Usuario recibe confirmación
+```
 
-    ```bash
-    npm start
-    ```
+## Deploy en GitHub Pages
 
-## Uso
+1. Ve a **Settings → Pages** en tu repositorio
+2. Selecciona la rama `main` y carpeta `/ (root)`
+3. La app queda disponible en `https://tu-usuario.github.io/App-Reservas-O-M/`
 
-### Crear una Reservación
+## Notas del proyecto
 
-- Completa el formulario de reservación con los campos requeridos: maestro, materia, fecha, hora y número de laboratorio.
-- Haz clic en **Guardar** para registrar la reservación.
+Este proyecto fue desarrollado como solución freelance para la comunidad universitaria O&M. Demuestra el uso de JavaScript vanilla para manejar estado de la aplicación, manipulación del DOM y persistencia simple con LocalStorage sin necesidad de frameworks o backends.
 
-### Editar una Reservación
+## Autor
 
-- Selecciona la reservación que deseas editar de la lista.
-- Modifica los campos y haz clic en **Guardar** para actualizar la información.
-
-### Eliminar una Reservación
-
-- Encuentra la reservación que deseas eliminar en la lista.
-- Haz clic en el botón **Eliminar** y confirma la acción.
-
-### Filtrar y Buscar Reservaciones
-
-- Utiliza la barra de búsqueda para buscar reservaciones por maestro, materia o laboratorio.
-- Aplica filtros para visualizar reservaciones por maestro, materia o número de laboratorio.
-
-### Generar Reporte en PDF
-
-- Filtra las reservaciones por un rango de fechas específico.
-- Haz clic en el botón **Generar PDF** para exportar las reservaciones en un archivo PDF.
-
-## Contribuciones
-
-Si deseas contribuir a este proyecto:
-
-1. Haz un fork del repositorio.
-2. Crea una nueva rama para tu funcionalidad o corrección:
-
-    ```bash
-    git checkout -b nombre-de-tu-rama
-    ```
-
-3. Realiza tus cambios y envía un pull request.
+**Orlando Martinez** — ERP Consultant & Software Developer  
+Santo Domingo, República Dominicana  
+[Portfolio](https://orlando-developer.web.app) · [GitHub](https://github.com/OrlandoMartinez-developer)
